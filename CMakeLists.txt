@@ -13,6 +13,10 @@ set(PROJECT_VERSION_PATCH 0)
 option(BUILD_SHARED_LIBS OFF)
 option(BUILD_EXAMPLE ON)
 
+if(BUILD_SHARED_LIBS)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+endif()
+
 add_library(optimus-cpp
   src/optimus.h
   src/optimus.cpp
@@ -20,17 +24,17 @@ add_library(optimus-cpp
   src/millerrabin.cpp
 )
 
+if (BUILD_SHARED_LIBS)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/optimus-cpp.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/optimus-cpp.lib DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+else()
+  install(TARGETS optimus-cpp DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+endif()
+install(FILES src/optimus.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+
 if (BUILD_EXAMPLE)
   add_executable(optimus-cpp-example
     example/main.cpp
   )
   target_link_libraries(optimus-cpp-example PRIVATE optimus-cpp)
 endif()
-
-if (BUILD_SHARED_LIBS)
-  #install(TARGETS optimus-cpp.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
-  install(TARGETS optimus-cpp DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-else()
-  install(TARGETS optimus-cpp DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
-endif()
-install(FILES src/optimus.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
