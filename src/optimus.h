@@ -16,6 +16,7 @@ public:
     uint64 decode(uint64 value);
     static uint64 calcModInverse(uint64 prime);
 
+    // getters
     bool isValid() { return m_valid; }
     std::string errorString() { return m_lastError; }
     uint64 prime() { return m_prime; }
@@ -23,8 +24,6 @@ public:
     uint64 random() { return m_random; }
 
 private:
-    bool checkInput(uint64 prime, uint64 random, uint64 modInverse = 0);
-
     //check for prime
     uint64 mulmod(uint64 a, uint64 b, uint64 mod);
     uint64 modulo(uint64 base, uint64 exp, uint64 mod);

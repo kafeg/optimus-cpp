@@ -7,11 +7,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_VERSION_MAJOR 0)
-set(PROJECT_VERSION_MINOR 1)
+set(PROJECT_VERSION_MINOR 3)
 set(PROJECT_VERSION_PATCH 0)
 
 option(BUILD_SHARED_LIBS OFF)
-option(BUILD_EXAMPLE OFF)
+option(BUILD_TEST OFF)
 
 if(BUILD_SHARED_LIBS)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
@@ -30,9 +30,9 @@ else()
 endif()
 install(FILES src/optimus.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
-if (BUILD_EXAMPLE)
-  add_executable(optimus-cpp-example
-    example/main.cpp
+if (BUILD_TEST)
+  add_executable(optimus-cpp-test
+    test/main.cpp
   )
-  target_link_libraries(optimus-cpp-example PRIVATE optimus-cpp)
+  target_link_libraries(optimus-cpp-test PRIVATE optimus-cpp)
 endif()
