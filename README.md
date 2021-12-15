@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
     // all values <= INT_MAX
     uint64 prime = 1580030173;
-    uint64 modInverse = 59260789; // or once and slow: `uint64 modInverse = Optimus::calcModInverse(prime);`
+    uint64 modInverse = 59260789; // or slow: `uint64 modInverse = Optimus::calcModInverse(prime);`
     uint64 random = 1163945558;   // or `uint64 random = std::rand();`
 
     Optimus optimus(prime, modInverse, random);
@@ -54,12 +54,18 @@ int main(int argc, char *argv[])
     uint64 myId = std::rand();
     uint64 encoded = optimus.encode(myId);
     uint64 decoded = optimus.decode(encoded);
-    
+
     std::cout << optimus.prime() << " " << optimus.modInverse() << " " << optimus.random() << std::endl;
     std::cout << myId << " " << encoded << " " << decoded << std::endl;
-    
+
     return 0;
 }
+```
+
+Sample output:
+```
+1580030173 59260789 1163945558
+2728 1448777054 2728
 ```
 
 ### Alternatives
