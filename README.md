@@ -5,6 +5,8 @@ You could use it if you need your ids to consist of only numbers. It's based on 
 
 This realization doesn't work with big-integers, max id should be <= `INT_MAX` or `2147483647`.
 
+CI and Platforms: https://github.com/microsoft/vcpkg/pull/22025
+
 ### Build and install
 
 Please just use vcpkg to build this library:
