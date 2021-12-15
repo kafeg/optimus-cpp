@@ -25,7 +25,7 @@ uint64 Optimus::decode(uint64 value)
 
 bool Optimus::checkInput(uint64 prime, uint64 random, uint64 modInverse)
 {
-    if (!MillerRabin::probablyPrime(prime, MR_ITER))
+    if (!probablyPrime(prime, MR_ITER))
     {
         double accuracy = 1.0 - 1.0/std::pow(double(4), double(MR_ITER));
         m_lastError = std::to_string(prime) + " is not prime. Accuracy: " + std::to_string(accuracy);
@@ -51,10 +51,62 @@ bool Optimus::checkInput(uint64 prime, uint64 random, uint64 modInverse)
 
 uint64 Optimus::calcModInverse(uint64 prime)
 {
-    uint64 max = uint64(INT_MAX)+uint64(1);
+    uint64 max = uint64(INT_MAX) + uint64(1);
     for (uint64 x = 1; x < max; x++)
         if (((prime % max) * (x % max)) % max == 1)
             return x;
 
     return 0;
+}
+
+uint64 Optimus::mulmod(uint64 a, uint64 b, uint64 mod)
+{
+    uint64  x = 0,y = a % mod;
+    while (b > 0) {
+        if (b % 2 == 1) {
+            x = (x + y) % mod;
+        }
+        y = (y * 2) % mod;
+        b/= 2;
+    }
+    return x % mod;
+}
+
+uint64 Optimus::modulo(uint64 base, uint64 exp, uint64 mod)
+{
+    uint64 x = 1;
+    uint64 y = base;
+    while (exp > 0) {
+        if (exp % 2 == 1)
+            x = (x * y) % mod;
+        y = (y * y) % mod;
+        exp = exp/2;
+    }
+    return x % mod;
+}
+
+bool Optimus::probablyPrime(uint64 val, int iterations)
+{
+    if (val < 2) {
+        return false;
+    }
+    if (val != 2 && val % 2==0) {
+        return false;
+    }
+    uint64 s = val - 1;
+    while (s % 2 == 0) {
+        s/= 2;
+    }
+    for (int i = 0; i < iterations; i++) {
+        uint64 a = std::rand() % (val - 1) + 1, temp = s;
+        uint64 mod = modulo(a, temp, val);
+        while (temp != val - 1 && mod != 1 && mod != val - 1) {
+            mod = mulmod(mod, mod, val);
+            temp *= 2;
+        }
+        if (mod != val - 1 && temp % 2 == 0) {
+            return false;
+        }
+    }
+    return true;
 }

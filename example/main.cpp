@@ -9,17 +9,19 @@ int main(int argc, char *argv[])
 
     // https://primes.utm.edu/lists/small/millions/
 
-    // simple create
+    // simple create with wrong prime and modinverse
     Optimus optimus(961748942, 2, std::rand());
     std::cout << optimus.isValid() << " " << optimus.lastError() << std::endl;
 
-    optimus = Optimus(961748941, 2, std::rand());
+    // create with correct prime and mod inverse
+    optimus = Optimus(1580030173, 59260789, std::rand());
     std::cout << optimus.isValid() << " " << optimus.lastError() << std::endl;
 
     // calculate mod inverse (slow)
     optimus = Optimus(1580030173, std::rand());
     std::cout << optimus.isValid() << " " << optimus.lastError() << " " << optimus.prime() << " " << optimus.modInverse() << " " << optimus.random() << std::endl;
 
+    // test all possible values
     for(RANGE(i, INT_MAX)) {
         uint64 encoded = optimus.encode(i);
         uint64 decoded = optimus.decode(encoded);

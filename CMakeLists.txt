@@ -20,8 +20,6 @@ endif()
 add_library(optimus-cpp
   src/optimus.h
   src/optimus.cpp
-  src/millerrabin.h
-  src/millerrabin.cpp
 )
 
 if (BUILD_SHARED_LIBS)

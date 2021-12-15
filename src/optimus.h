@@ -1,9 +1,10 @@
 #ifndef OPTIMUSNATIVE_H
 #define OPTIMUSNATIVE_H
 #include <string>
-#include "millerrabin.h"
 
 #define MR_ITER 20
+
+typedef long long uint64;
 
 class Optimus {
 
@@ -27,6 +28,11 @@ public:
 private:
     bool checkInput(uint64 prime, uint64 random, uint64 modInverse = 0);
     uint64 calcModInverse(uint64 prime);
+
+    //check for prime
+    uint64 mulmod(uint64 a, uint64 b, uint64 mod);
+    uint64 modulo(uint64 base, uint64 exp, uint64 mod);
+    bool probablyPrime(uint64 val, int iterations);
 
 private:
     uint64 m_prime;
