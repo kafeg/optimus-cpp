@@ -4,30 +4,26 @@
 
 #define MR_ITER 20
 
-typedef long long uint64;
+typedef unsigned long long uint64;
 
 class Optimus {
 
 public:
     Optimus() = delete;
-    // load all values
-    Optimus(uint64 prime, uint64 random, uint64 modInverse);
-
-    // calculate 'modInverse'
-    Optimus(uint64 prime, uint64 random);
+    Optimus(uint64 prime, uint64 modInverse, uint64 random);
 
     uint64 encode(uint64 value);
     uint64 decode(uint64 value);
+    static uint64 calcModInverse(uint64 prime);
 
     bool isValid() { return m_valid; }
-    std::string lastError() { return m_lastError; }
+    std::string errorString() { return m_lastError; }
     uint64 prime() { return m_prime; }
     uint64 modInverse() { return m_modInverse; }
     uint64 random() { return m_random; }
 
 private:
     bool checkInput(uint64 prime, uint64 random, uint64 modInverse = 0);
-    uint64 calcModInverse(uint64 prime);
 
     //check for prime
     uint64 mulmod(uint64 a, uint64 b, uint64 mod);

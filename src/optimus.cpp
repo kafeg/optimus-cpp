@@ -2,15 +2,10 @@
 #include <limits.h>
 #include <cmath>
 
-Optimus::Optimus(uint64 prime, uint64 random, uint64 modInverse)
+Optimus::Optimus(uint64 prime, uint64 modInverse, uint64 random)
     : m_valid(false)
 {
     checkInput(prime, random, modInverse);
-}
-
-Optimus::Optimus(uint64 prime, uint64 random)
-{
-    checkInput(prime, random);
 }
 
 uint64 Optimus::encode(uint64 value)
