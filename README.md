@@ -24,12 +24,12 @@ cd vcpkg
 
 ### Usage
 
-1. Calculate `Prime`, `ModInverse` and `Random`. All values should be <= INT_MAX.
-1.1. `Prime` should be (2147483647). You could take Prime there: http://primes.utm.edu/lists/small/millions/
-1.2. Calculate `ModInverse` for your prime using `Optimus::calcModInverse(2147483647)` - this is slow operation so do it once and then save value.
-1.3. Generate any `Random` you want
-2. Store those 3 values and then load and use them for create instance of Optimus
-3. Use generated number in the code like this:
+- Calculate `Prime`, `ModInverse` and `Random`. All values should be <= INT_MAX.
+- `Prime` should be (2147483647). You could take Prime there: http://primes.utm.edu/lists/small/millions/
+- Calculate `ModInverse` for your prime using `Optimus::calcModInverse(2147483647)` - this is slow operation so do it once and then save value.
+- Generate any `Random` you want
+- Store those 3 values and then load and use them for create instance of Optimus
+- Use generated numbers in the code like this:
 
 ```cpp
 #include <iostream>
