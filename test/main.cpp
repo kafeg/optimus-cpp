@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         logCounter++;
         uint64 encoded = optimus.encode(i);
         uint64 decoded = optimus.decode(encoded);
-        if (!i == decoded)
+        if (i != decoded)
             std::cout << i << " " << decoded << " " << (i == decoded) << " " << encoded << std::endl;
 
         if (logCounter > 100000000) {
